@@ -1,0 +1,32 @@
+{% extends 'post/base.html'%}
+{% block content %}
+	<div class="container">
+		<br/>
+		<h1>Items-Posted</h1>
+		<br/>
+		<table class="table table-bordered">
+  			<tr>
+			    <th>Task</th>
+			    <th>Completed</th>
+			    <th>Delete</th>
+			    <th>Date</th>
+  			</tr>
+		{% for p in post%}
+			{% if p.completed%}
+	   			<tr class="table-secondary">
+			      <td class="striker">{{ p.task }}</td>
+			      <td><a href="{% url 'uncross_off' p.id%}">Incompleted Work</a></td>
+			      <td> <a href="{% url 'delete' p.id%}">Delete</a> </td>
+			      <td>{{ p.date_posted|date:"d F, Y " }}</td>
+	    		</tr>
+	    	{% else %}
+	    		<tr>
+			      <td>{{ p.task }}</td>
+			      <td><a href="{% url 'cross_off' p.id%}">Complete Work</a></td>
+			      <td> <a href="{% url 'delete' p.id%}">Delete</a> </td>
+			      <td>{{ p.date_posted|date:"d F, Y " }}</td>
+	    		</tr>
+	    	{% endif %}
+		{% endfor %}
+	</div>
+{% endblock content%}

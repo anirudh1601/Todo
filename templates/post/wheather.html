@@ -1,0 +1,32 @@
+{% extends 'post/base.html'%}
+{% block content %}
+	<form method="POST">
+		<div class="row">
+        	<div class="col-lg-4"></div>
+        	<br/>
+        	<div class="input-group">
+                    {% csrf_token %}
+                    {{form.name}} 
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </span>
+                </div>
+            <div class="col-lg-4">
+            	<br/>
+            	{% for city in city_weather reversed%}
+            		<div class="card " style="width: 10rem;">
+  						<img class="card-img-top" src="http://openweathermap.org/img/w/{{city.icon}}.png" alt="Card image cap">
+  						<div class="card-body">
+    						<h5 class="card-title">Weather</h5>
+    						<p class="card-text">{{city.city}}</p>
+    						<p class="card-text">{{city.description}}</p>
+    						<p class="card-text">{{city.weather}} Celsius</p>
+
+  						</div>
+					</div>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+	
+{% endblock content%}
